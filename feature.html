@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EffiTrack - Features</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;700&display=swap');
+
+        :root {
+            --background-gradient: radial-gradient(circle, #a18cd1 20%, white 80%);
+            --nav-bg: #e6e1f9;
+            --nav-text: #4a4a4a;
+            --hero-bg: #f4f1ff;
+            --button: #b185db;
+            --button-hover: #9775cb;
+            --footer-bg: #e6e1f9;
+            --text-main: #3e3e3e;
+            --shadow: rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            text-align: center;
+            background: var(--background-gradient);
+            margin: 0;
+            padding: 20px;
+            color: var(--text-main);
+        }
+
+        .features-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            max-width: 600px;
+            margin: auto;
+        }
+
+        .container {
+            width: 220px;
+            height: 220px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            border-radius: 12px;
+            background: white;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 10px var(--shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            color: var(--text-main);
+            font-weight: bold;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .container:hover {
+            transform: translateX(50px) scale(1.3);
+            box-shadow: 0 8px 20px var(--shadow);
+            z-index: 10;
+            background: var(--hero-bg);
+        }
+
+        .container img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.6;
+            transition: opacity 0.3s ease;
+        }
+
+        .container:hover img {
+            opacity: 0;
+        }
+
+        .container h2 {
+            position: absolute;
+            top: 30%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            margin: 0;
+            font-size: 18px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .container .info {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 14px;
+            text-align: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .container:hover h2, .container:hover .info {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <h1 style="color: var(--text-main);"> EffiTrack - Features </h1>
+    
+    <div class="features-container">
+        <div class="container" onclick="window.open('kanban-board.html', '_blank')">
+            <img src="taskManager.jpg" alt="Task Manager">
+            <h2>📝 Task Manager</h2>
+            <div class="info">Manage and organize tasks efficiently.</div>
+        </div>
+
+        <div class="container" onclick="window.open('timer.html', '_blank')">
+            <img src="clock.jpg" alt="Timer">
+            <h2>⏳Time Tracking</h2>
+            <br>   <br>
+            <div class="info">Track time effectively with built-in timer tools.</div>
+        </div>
+
+        <div class="container" onclick="window.open('calendar.html', '_blank')">
+            <img src="calendarImage.jpg" alt="Calendar">
+            <h2>📅 Calendar</h2>
+            <div class="info">Plan and track your schedule easily.</div>
+        </div>
+
+        <div class="container" onclick="window.open('study-video.html', '_blank')">
+            <img src="study.jpg" alt="Study With Me">
+            <h2>📺 Study With Me</h2>
+            <div class="info">Focus and study with virtual sessions.</div>
+        </div>
+
+        <div class="container" onclick="window.open('spotify.html', '_blank')">
+            <img src="spotify.jpg" alt="Spotify Music">
+            <h2>🎵 Spotify Music</h2>
+            <div class="info">Listen to your favorite music while working.</div>
+        </div>
+
+        <div class="container" onclick="window.open('music.html', '_blank')">
+            <img src="music.jpg" alt="Custom Music">
+            <h2>🎼 Custom Music</h2>
+            <div class="info">Create and play your own playlists.</div>
+        </div>
+    </div>
+</body>
+</html>
