@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EffiTrack - Productivity Hub</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;700&display=swap');
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            text-align: center;
+            background: linear-gradient(135deg, #FFDEE9, #B5FFFC);
+            margin: 0;
+            padding: 20px;
+        }
+
+        .tracker {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            max-width: 1000px;
+            margin: auto;
+        }
+
+        .container {
+            width: 350px;
+            padding: 20px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .container:hover {
+            transform: translateY(-5px);
+        }
+
+        .input-group {
+            display: flex;
+            gap: 5px;
+        }
+
+        input, textarea {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+
+        button {
+            padding: 12px 18px;
+            background: linear-gradient(135deg, #FF9A8B, #FF6A88);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: linear-gradient(135deg, #FF758C, #FF6A88);
+            transform: scale(1.05);
+        }
+
+        .tracker {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            max-width: 1000px;
+            margin: auto;
+        }
+
+        .kanban-board {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            max-width: 1000px;
+            margin: auto;
+        }
+
+        .kanban-column {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 15px;
+            border-radius: 12px;
+            width: 300px;
+            min-height: 400px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .kanban-column h2 {
+            margin-bottom: 10px;
+        }
+
+        .task {
+            background: #f8d7da;
+            padding: 10px;
+            margin-top: 5px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: grab;
+        }
+
+        .input-group {
+            display: flex;
+            gap: 5px;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        input {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 14px;
+            width: 200px;
+        }
+        .tracker {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            max-width: 1000px;
+            margin: auto;
+        }
+
+        .kanban-board {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            max-width: 1000px;
+            margin: auto;
+        }
+
+        .kanban-column {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 15px;
+            border-radius: 12px;
+            width: 300px;
+            min-height: 400px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .kanban-column h2 {
+            margin-bottom: 10px;
+        }
+
+        .task {
+            background: #f8d7da;
+            padding: 10px;
+            margin-top: 5px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: grab;
+        }
+
+        button {
+            padding: 12px 18px;
+            background: linear-gradient(135deg, #FF9A8B, #FF6A88);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: linear-gradient(135deg, #FF758C, #FF6A88);
+            transform: scale(1.05);
+        }
+        ul {
+            padding: 0;
+            list-style: none;
+        }
+
+        li {
+            background: #f8d7da;
+            padding: 10px;
+            margin-top: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+
+        .delete {
+            background: red;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            padding: 5px 8px;
+        }
+
+        .video-container, .music-container {
+            margin-top: 20px;
+        }
+
+        /* Calendar Styling */
+        #calendar {
+            margin-top: 20px;
+            width: 100%;
+            max-width: 700px;
+            margin: auto;
+        }
+    </style>
+
+    <!-- FullCalendar Library -->
+    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.5/main.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.5/main.min.js"></script>
+</head>
+
+<body>
+    <h1>🌸 EffiTrack - Productivity Hub 🌸</h1>
+    
+    <div class="tracker">
+        <!-- Task Manager -->
+        <div class="container">
+            <h2>📝 Task Manager</h2>
+            <div class="input-group">
+                <input type="text" id="taskInput" placeholder="Enter task...">
+                <button onclick="addTask()">Add Task</button>
+            </div>
+            
+            <ul id="taskList"></ul>
+        </div>
+
+        <!-- Note Maker -->
+        <div class="kanban-board">
+            <div class="kanban-column" id="pending" ondrop="drop(event)" ondragover="allowDrop(event)">
+                <h2>🟡 Pending</h2>
+            </div>
+            <div class="kanban-column" id="inProgress" ondrop="drop(event)" ondragover="allowDrop(event)">
+                <h2>🟠 In Progress</h2>
+            </div>
+            <div class="kanban-column" id="completed" ondrop="drop(event)" ondragover="allowDrop(event)">
+                <h2>🟢 Completed</h2>
+            </div>
+        </div>
+    
+        <div class="container">
+            <h2>Add Task</h2>
+            <input type="text" id="taskInput" placeholder="Enter task...">
+            <button onclick="addTask()">Add Task</button>
+            
+        </div>
+
+
+    <!-- Calendar Integration -->
+    <div class="container">
+        <h2>📅 Calendar</h2>
+        <div id="calendar"></div>
+    </div>
+
+    <!-- Study With Me Video -->
+    <div class="container video-container">
+        <h2>📺 Study With Me</h2>
+        <iframe id="studyVideo" width="100%" height="200" src="https://www.youtube.com/embed/5qap5aO4i9A" frameborder="0" allowfullscreen></iframe>
+    </div>
+
+    <!-- Spotify Integration (Placeholder) -->
+    <div class="container">
+        <h2>🎵 Spotify Music</h2>
+        <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/37i9dQZF1DX6VdMW310YC7" width="100%" height="200" frameborder="0" allowfullscreen></iframe>
+    </div>
+
+    <!-- Music Player -->
+    <div class="container music-container">
+        <h2>🎶 Custom Music</h2>
+        <button onclick="playMusic('Deepwork.mp3')">Deep Work</button>
+        <button onclick="playMusic('Intensefocus.mp3')">Intense Focus</button>
+        <button onclick="playMusic('creative.mp3')">Creative Thinking</button>
+        <button onclick="playMusic('moti.mp3')">Motivation</button>
+        <audio id="audioPlayer" controls style="margin-top: 10px; width: 100%; display: none;"></audio>
+    </div>
+    <div class="container">
+        <h2>📐 Figma Design</h2>
+        <iframe style="border: 1px solid rgba(0, 0, 0, 0.1);" width="800" height="450" src="https://embed.figma.com/design/1h7IxiYRJr0gvJF4VX9BwV/Untitled?node-id=0-1&embed-host=share" allowfullscreen></iframe>
+    </div>
+
+    <script>
+        // Task Manager
+
+        function allowDrop(event) {
+            event.preventDefault();
+        }
+
+        function drag(event) {
+            event.dataTransfer.setData("text", event.target.id);
+        }
+
+        function drop(event) {
+            event.preventDefault();
+            let taskId = event.dataTransfer.getData("text");
+            let task = document.getElementById(taskId);
+            event.target.appendChild(task);
+        }
+
+        function addTask() {
+            let taskInput = document.getElementById("taskInput");
+            if (taskInput.value.trim() === "") return;
+            
+            let task = document.createElement("div");
+            task.className = "task";
+            task.id = "task-" + Date.now();
+            task.draggable = true;
+            task.ondragstart = drag;
+            task.innerText = taskInput.value;
+            
+            document.getElementById("pending").appendChild(task);
+            taskInput.value = "";
+
+            
+        function addTask() {
+            let taskInput = document.getElementById("taskInput");
+            let taskList = document.getElementById("taskList");
+            if (taskInput.value.trim() === "") return;
+            
+            let li = document.createElement("li");
+            li.innerHTML = taskInput.value + ' <button class="delete" onclick="this.parentNode.remove()">X</button>';
+            taskList.appendChild(li);
+            taskInput.value = "";
+        }
+
+        // Notes Manager
+        function addNote() {
+            let title = document.getElementById("noteTitle").value;
+            let content = document.getElementById("noteContent").value;
+            if (title.trim() === "" || content.trim() === "") return;
+            
+            let noteList = document.getElementById("noteList");
+            let div = document.createElement("div");
+            div.innerHTML = <h4>${title}</h4><p>${content}</p>;
+            noteList.appendChild(div);
+        }
+
+        // Music Player
+        function playMusic(audioFile) {
+            let audioPlayer = document.getElementById("audioPlayer");
+            audioPlayer.src = audioFile;
+            audioPlayer.style.display = "block";
+            audioPlayer.play();
+        }
+        function allowDrop(event) {
+            event.preventDefault();
+        }
+
+        function drag(event) {
+            event.dataTransfer.setData("text", event.target.id);
+        }
+
+        function drop(event) {
+            event.preventDefault();
+            let taskId = event.dataTransfer.getData("text");
+            let task = document.getElementById(taskId);
+            event.target.appendChild(task);
+        }
+
+        function addTask() {
+            let taskInput = document.getElementById("taskInput");
+            if (taskInput.value.trim() === "") return;
+            
+            let task = document.createElement("div");
+            task.className = "task";
+            task.id = "task-" + Date.now();
+            task.draggable = true;
+            task.ondragstart = drag;
+            task.innerText = taskInput.value;
+            
+            document.getElementById("pending").appendChild(task);
+            taskInput.value = "";
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            var calendarEl = document.getElementById('calendar');
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth',
+                selectable: true,
+                dateClick: function(info) {
+                    alert("Selected Date: " + info.dateStr);
+                }
+            });
+            calendar.render();
+        });
+    </script>
+</body>
+</html>
