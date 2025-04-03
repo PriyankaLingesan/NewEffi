@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EffiTrack - Productivity Hub</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;700&display=swap');
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            text-align: center;
+            background: linear-gradient(135deg, #FFDEE9, #B5FFFC);
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            padding: 20px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .container:hover {
+            transform: translateY(-5px);
+        }
+
+        .row {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .equal-container {
+            flex: 1;
+            min-width: 300px;
+            max-width: 500px;
+        }
+
+        input, textarea {
+            width: 80%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        button {
+            padding: 12px;
+            background: linear-gradient(135deg, #FF9A8B, #FF6A88);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: linear-gradient(135deg, #FF758C, #FF6A88);
+            transform: scale(1.05);
+        }
+
+        .kanban-board {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin: auto;
+        }
+
+        .kanban-column {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 15px;
+            border-radius: 12px;
+            width: 300px;
+            min-height: 400px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .kanban-column:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        .equal-container iframe {
+            width: 100%;
+            height: 250px;
+            border-radius: 10px;
+        }
+
+        .task {
+            background: #f8d7da;
+            padding: 10px;
+            margin-top: 5px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: grab;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .task button {
+            padding: 4px 8px;
+            font-size: 12px;
+            background: #dc3545;
+            margin-left: 8px;
+        }
+
+        .task button:hover {
+            background: #bb2d3b;
+        }
+
+        .music-buttons {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            justify-content: center;
+            max-width: 300px;
+            margin: auto;
+        }
+
+        #taskList {
+            list-style-type: none;
+            padding: 0;
+            margin: 0 auto;
+            max-width: 80%;
+        }
+    </style>
+
+    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.5/main.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.5/main.min.js"></script>
+</head>
+
+<body>
+    <h1>EffiTrack - Productivity Hub</h1>
+
+    <!-- Task Manager (Row 1) -->
+    <div class="container">
+        <h2>📝 Task Manager</h2>
+        <input type="text" id="taskInput" placeholder="Enter task...">
+        <button onclick="addTaskToKanban()">Add Task</button>
+        <ul id="taskList"></ul>
+    </div>
+    <br><br>
+
+    <!-- Kanban Board (Row 2) -->
+    <div class="kanban-board">
+        <div class="kanban-column" id="pending" ondrop="drop(event)" ondragover="allowDrop(event)">
+            <h2>🟡 Pending</h2>
+        </div>
+        <div class="kanban-column" id="inProgress" ondrop="drop(event)" ondragover="allowDrop(event)">
+            <h2>🟠 In Progress</h2>
+        </div>
+        <div class="kanban-column" id="completed" ondrop="drop(event)" ondragover="allowDrop(event)">
+            <h2>🟢 Completed</h2>
+        </div>
+    </div>
+    <br><br>
+    <!-- Calendar & Study With Me (Row 3) -->
+    <div class="row">
+        <div class="container equal-container">
+            <h2>📅 Calendar</h2>
+            <div id="calendar"></div>
+        </div>
+        <div class="container equal-container">
+            <h2>📺 Study With Me</h2>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/lTRiuFIWV54?si=PUl6LTcfg_Etdnk4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+    </div>
+
+    <!-- Spotify & Custom Music (Row 4) -->
+    <div class="row">
+        <div class="container equal-container">
+            <h2>🎵 Spotify Music</h2>
+            <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/37i9dQZF1DX6VdMW310YC7" width="100%" height="200" frameborder="0" allowfullscreen></iframe>
+        </div>
+
+        <div class="container equal-container">
+            <h2>🎶 Custom Music</h2>
+            <div class="music-buttons">
+                <button onclick="playMusic('Deepwork.mp3')">Deep Work</button>
+                <button onclick="playMusic('Intensefocus.mp3')">Intense Focus</button>
+                <button onclick="playMusic('creative.mp3')">Creative Thinking</button>
+                <button onclick="playMusic('moti.mp3')">Motivation</button>
+            </div>
+            <audio id="audioPlayer" controls style="margin-top: 10px; width: 100%; display: none;"></audio>
+        </div>
+    </div>
+
+    <script>
+        // Task Manager Functions
+        function addTaskToKanban() {
+            let taskInput = document.getElementById("taskInput");
+            if (taskInput.value.trim() === "") return;
+
+            let task = document.createElement("div");
+            task.className = "task";
+            task.id = "task-" + Date.now();
+            task.draggable = true;
+            task.ondragstart = drag;
+            task.innerHTML = `
+                ${taskInput.value}
+                <button onclick="this.parentElement.remove()">X</button>
+            `;
+            
+            document.getElementById("pending").appendChild(task);
+            taskInput.value = "";
+        }
+
+        // Kanban Board Functions
+        function allowDrop(event) {
+            event.preventDefault();
+        }
+
+        function drag(event) {
+            event.dataTransfer.setData("text", event.target.id);
+        }
+
+        function drop(event) {
+            event.preventDefault();
+            let taskId = event.dataTransfer.getData("text");
+            let task = document.getElementById(taskId);
+            event.target.appendChild(task);
+        }
+
+        // Calendar Integration
+        document.addEventListener('DOMContentLoaded', function () {
+            var calendarEl = document.getElementById('calendar');
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth',
+                selectable: true,
+                dateClick: function(info) {
+                    alert("Selected Date: " + info.dateStr);
+                }
+            });
+            calendar.render();
+        });
+
+        // Music Player
+        function playMusic(audioFile) {
+            let audioPlayer = document.getElementById("audioPlayer");
+            audioPlayer.src = audioFile;
+            audioPlayer.style.display = "block";
+            audioPlayer.play();
+        }
+    </script>
+</body>
+</html>

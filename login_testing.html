@@ -43,14 +43,6 @@
             min-height: 100vh;
         }
 
-        .container {
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* Navigation */
         .navbar {
             width: 100%;
             background: var(--white);
@@ -70,11 +62,6 @@
             gap: 10px;
         }
 
-        .logo i {
-            font-size: 28px;
-        }
-
-        /* Login Section */
         .login-section {
             flex: 1;
             display: flex;
@@ -103,10 +90,6 @@
             font-size: 28px;
             font-weight: 700;
             margin-bottom: 10px;
-        }
-
-        .login-header p {
-            opacity: 0.9;
         }
 
         .login-form {
@@ -160,22 +143,6 @@
             font-size: 14px;
         }
 
-        .remember-me {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .remember-me input {
-            accent-color: var(--primary);
-        }
-
-        .forgot-password a {
-            color: var(--primary);
-            text-decoration: none;
-            font-weight: 500;
-        }
-
         .btn {
             width: 100%;
             padding: 14px;
@@ -196,55 +163,6 @@
             background: var(--primary-dark);
         }
 
-        .divider {
-            display: flex;
-            align-items: center;
-            margin: 25px 0;
-            color: var(--text-light);
-            font-size: 14px;
-        }
-
-        .divider::before,
-        .divider::after {
-            content: "";
-            flex: 1;
-            border-bottom: 1px solid #E5E7EB;
-        }
-
-        .divider::before {
-            margin-right: 15px;
-        }
-
-        .divider::after {
-            margin-left: 15px;
-        }
-
-        .social-login {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        .btn-social {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            padding: 12px;
-            border-radius: var(--radius-md);
-            font-size: 15px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border: 1px solid #E5E7EB;
-            background: var(--white);
-            color: var(--text);
-        }
-
-        .btn-social:hover {
-            background: var(--lighter);
-        }
-
         .register-link {
             text-align: center;
             margin-top: 30px;
@@ -257,7 +175,6 @@
             text-decoration: none;
         }
 
-        /* Footer */
         .footer {
             background: #0F172A;
             color: var(--white);
@@ -270,30 +187,9 @@
             font-size: 14px;
         }
 
-        /* Responsive */
         @media (max-width: 768px) {
             .login-container {
                 max-width: 90%;
-            }
-            
-            .login-header {
-                padding: 25px 20px;
-            }
-            
-            .login-form {
-                padding: 30px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .options {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 15px;
-            }
-            
-            .login-header h1 {
-                font-size: 24px;
             }
         }
     </style>
@@ -314,9 +210,9 @@
                 <h1>Welcome Back</h1>
                 <p>Sign in to access your productivity dashboard</p>
             </div>
-            
+
             <div class="login-form">
-                <form>
+                <form id="login-form">
                     <div class="form-group">
                         <label for="email">Email Address</label>
                         <div class="input-group">
@@ -324,7 +220,7 @@
                             <input type="email" id="email" placeholder="Enter your email" required>
                         </div>
                     </div>
-                    
+
                     <div class="form-group">
                         <label for="password">Password</label>
                         <div class="input-group">
@@ -332,7 +228,7 @@
                             <input type="password" id="password" placeholder="Enter your password" required>
                         </div>
                     </div>
-                    
+
                     <div class="options">
                         <div class="remember-me">
                             <input type="checkbox" id="remember">
@@ -342,22 +238,9 @@
                             <a href="#">Forgot password?</a>
                         </div>
                     </div>
-                    
+
                     <button type="submit" class="btn btn-primary">Sign In</button>
-                    
-                    <div class="divider">or continue with</div>
-                    
-                    <div class="social-login">
-                        <button type="button" class="btn-social">
-                            <i class="fab fa-google"></i>
-                            Sign in with Google
-                        </button>
-                        <button type="button" class="btn-social">
-                            <i class="fab fa-apple"></i>
-                            Sign in with Apple
-                        </button>
-                    </div>
-                    
+
                     <div class="register-link">
                         Don't have an account? <a href="#">Sign up</a>
                     </div>
@@ -374,18 +257,15 @@
     </footer>
 
     <script>
-        // Simple form validation (can be expanded)
-        document.querySelector('form').addEventListener('submit', function(e) {
+        document.getElementById('login-form').addEventListener('submit', function(e) {
             e.preventDefault();
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
-            
-            // Basic validation
+
             if (email && password) {
-                // Here you would typically send the data to your server
                 console.log('Login submitted:', { email, password });
-                alert('Login successful! Redirecting to dashboard...');
-                // window.location.href = 'dashboard.html';
+                alert('Login successful! Redirecting...');
+                window.location.href = 'purple3_testing.html';
             } else {
                 alert('Please fill in all fields');
             }
